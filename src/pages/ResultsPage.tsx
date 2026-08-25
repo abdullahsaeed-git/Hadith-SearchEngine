@@ -79,7 +79,7 @@ function ResultsPage() {
     if (activeCollections.length > 0) {
       params.set('collections', activeCollections.join(','));
     }
-    // setSearchParams(params);
+    setSearchParams(params);
      navigate(`/search?${params.toString()}`);
   };
 
