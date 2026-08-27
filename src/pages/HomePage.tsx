@@ -40,7 +40,7 @@ function HomePage() {
         <h1 className="text-4xl font-bold text-white tracking-tight">
           Deen Companion
         </h1>
-        <p className="text-gray-500 mt-2 text-sm">Semantic Hadith Search across 8 collections</p>
+        <p className="text-gray-500 mt-2 text-sm">Semantic Hadith Search across 7 collections</p>
       </div>
 
       {/* Search Bar */}

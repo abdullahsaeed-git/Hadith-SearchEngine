@@ -15,7 +15,7 @@ interface Hadith {
 }
 
 const COLLECTIONS: string[] = [
-  "bukhari", "muslim", "nasai", "abudawud", "tirmidhi", "ibnmajah", "malik", "ahmad"
+  "bukhari", "muslim", "nasai", "abudawud", "tirmidhi", "ibnmajah", "malik"
 ];
 
 function ResultsPage() {
