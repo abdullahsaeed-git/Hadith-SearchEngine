@@ -10,6 +10,8 @@ interface Hadith {
   ar: string | null;
   ur: string | null;
   similarity_score: number;
+  keyword_score: number;
+  hybrid_score: number;
 }
 
 const COLLECTIONS: string[] = [
@@ -186,13 +188,15 @@ function ResultsPage() {
           <div className="space-y-3">
             {results.map((hadith, index) => {
               const text = getText(hadith);
-              const score = Math.round(hadith.similarity_score * 100);
+              const semPct = Math.round(hadith.similarity_score * 100);
+              const keyPct = Math.round(hadith.keyword_score * 100);
+              const hybPct = Math.round(hadith.hybrid_score * 1000) / 10;
               return (
                 <div
                   key={index}
                   className="bg-[#12121a] rounded-xl p-5 border border-white/5 hover:border-white/10 transition-all cursor-pointer group"
                 >
-                  {/* Meta */}
+                  {/* Meta row */}
                   <div className="flex items-center justify-between mb-2.5">
                     <div className="flex items-center gap-2">
                       <span className="bg-emerald-500/10 text-emerald-400 px-2.5 py-0.5 rounded-md text-[11px] font-semibold uppercase tracking-wider">
@@ -203,10 +207,23 @@ function ResultsPage() {
                         Book {hadith.book_number}, Hadith {hadith.hadith_number}
                       </span>
                     </div>
-                    <span className={`text-xs font-medium ${
-                      score >= 70 ? 'text-emerald-400' : score >= 50 ? 'text-yellow-400' : 'text-gray-500'
-                    }`}>
-                      {score}%
+                  </div>
+
+                  {/* Scores row */}
+                  <div className="flex items-center gap-3 mb-2.5">
+                    <span className="inline-flex items-center gap-1 text-[11px]">
+                      <span className={`font-semibold ${semPct > 0 ? 'text-sky-400' : 'text-gray-700'}`}>{semPct}%</span>
+                      <span className="text-gray-600">semantic</span>
+                    </span>
+                    <span className="text-white/10">·</span>
+                    <span className="inline-flex items-center gap-1 text-[11px]">
+                      <span className={`font-semibold ${keyPct > 0 ? 'text-amber-400' : 'text-gray-700'}`}>{keyPct}%</span>
+                      <span className="text-gray-600">keyword</span>
+                    </span>
+                    <span className="text-white/10">·</span>
+                    <span className="inline-flex items-center gap-1 text-[11px]">
+                      <span className="font-semibold text-emerald-400">{hybPct}%</span>
+                      <span className="text-gray-600">hybrid</span>
                     </span>
                   </div>
 
